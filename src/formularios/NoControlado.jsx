@@ -6,7 +6,7 @@ const NoControlado = () => {
     };
 
     return(
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={handleSubmit}>
             <input 
             type="text" placeholder="Ingresa la receta" 
             className="form-control mb-2" 
