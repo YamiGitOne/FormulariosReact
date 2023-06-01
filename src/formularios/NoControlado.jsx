@@ -1,21 +1,21 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const NoControlado = () => {
     const form = useRef(null);
-    //const [error, setError] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setError('')
         
         const data = new FormData(form.current);
         console.log([...data.entries()]);
 
-        //validar datos
-       // if (!titleReceta.trim()) return setError('Llena todos los campos');
-
         //enviar datos
         const { titleReceta, descripcionReceta, state } = Object.fromEntries([...data.entries()]);
   
+        //validar datos
+        if (!titleReceta.trim() || !description.trim() || !state.trim()) return setError("Debes rellenar todos los campos");
     };
 
     return(
@@ -41,7 +41,7 @@ const NoControlado = () => {
             </select>
 
             <button type="submit" className="btn btn-primary">Procesar</button>
-          
+             {error !== '' && error }
         </form>
         
     );
