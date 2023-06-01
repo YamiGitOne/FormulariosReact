@@ -1,10 +1,10 @@
-import NoControlado from "./formularios/NoControlado";
+import Controlado from "./formularios/Controlado";
 
 const App = () => {
   return (
     <div className="container">
-      <h1 className="center" >Formulario de recetas</h1>
-      <NoControlado />
+      <h1 className="center" >Formulario controlado</h1>
+      <Controlado />
   </div>
   );
 };
