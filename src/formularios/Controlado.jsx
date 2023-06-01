@@ -10,11 +10,14 @@ const Controlado = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(todo.title, todo.description, todo.state)
-        
-        const data = new FormData(form.current);
-        console.log([...data.entries()]);
+        console.log(todo.title, todo.description, todo.state)   
+    };
 
+    const handleChange = e => {
+        setTodo({
+            ...todo,
+            [e.target.name]: e.target.value
+        });
     };
 
     return(
@@ -24,7 +27,7 @@ const Controlado = () => {
             className="form-control mb-2" 
             name="title" 
             value={todo.title}
-            onChange={e => setTodo({...todo, title: e.target.value})}
+            onChange={handleChange}
             />
 
             <textarea 
@@ -32,12 +35,12 @@ const Controlado = () => {
             className="form-control mb-2"  
             name="description" 
             value={todo.description}
-            onChange={e => setTodo({...todo, description: e.target.value})}
+            onChange={handleChange}
             />
-
+            <input type="checkbox" name="priority" />
             <select 
             className="form-select mb-2" 
-            name="state" value={todo.state} onChange={e => setTodo({...todo, state: e.target.value})}>
+            name="state" value={todo.state} onChange={handleChange}>
                 <option value="pendiente">Pendiente</option>
                 <option value="completado">Completado</option>
             </select>
