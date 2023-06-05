@@ -1,6 +1,5 @@
 import Controlado from "./formularios/Controlado";
 
-
 const App = () => {
   return (
     <div className="container">

@@ -5,18 +5,24 @@ const Controlado = () => {
     const [todo, setTodo] = useState({
         title: 'Todo #01',
         description: 'Descripción #01',
-        state: 'pendiente'
-    })
+        state: 'pendiente',
+        priority: true
+    });
+
+    const {title, description, state, priority} =todo
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(todo.title, todo.description, todo.state)   
+        console.log(title, description, state, priority)   
     };
 
     const handleChange = e => {
+
+        const {name, type, checked, value} = e.target
+
         setTodo({
             ...todo,
-            [e.target.name]: e.target.value
+            [name]: type === 'checkbox' ? checked : value,
         });
     };
 
@@ -26,7 +32,7 @@ const Controlado = () => {
             type="text" placeholder="Ingresa el titulo" 
             className="form-control mb-2" 
             name="title" 
-            value={todo.title}
+            value={title}
             onChange={handleChange}
             />
 
@@ -34,13 +40,23 @@ const Controlado = () => {
             placeholder="Ingresa la descripción" 
             className="form-control mb-2"  
             name="description" 
-            value={todo.description}
+            value={description}
             onChange={handleChange}
             />
-            <input type="checkbox" name="priority" />
+            <div className="form-check">
+                <input type="checkbox" 
+                name="priority" 
+                className="form-check-input mb-2" 
+                id="inputCheck"
+                checked={priority} 
+                onChange={handleChange}
+                />
+                <label htmlFor="inputCheck">Dar prioridad</label>
+            </div>
+            
             <select 
             className="form-select mb-2" 
-            name="state" value={todo.state} onChange={handleChange}>
+            name="state" value={state} onChange={handleChange}>
                 <option value="pendiente">Pendiente</option>
                 <option value="completado">Completado</option>
             </select>
