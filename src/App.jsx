@@ -1,12 +1,17 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Formulario from "./formularios/Formulario";
 import Todos from "./formularios/Todos"
 
-const inicialStateTodos = [];
+const inicialStateTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
 const App = () => {
 
       const [todos, setTodos] = useState(inicialStateTodos)
+
+      //almacenamiento local
+      useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos))
+      },[todos]);
 
       //agregar
       const addTodo = todo => {
