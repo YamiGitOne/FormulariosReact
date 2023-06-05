@@ -52,11 +52,19 @@ const App = () => {
         setTodos(newArray)
       };
 
+      //Ordenar por prioridad
+      const orderTodo = arrayTodos => {
+        return arrayTodos.sort((a,b) => {
+          if (a.priority) return -1
+          if (!a.priority) return 1
+        })
+      }
+
       return (
         <div className="container mb-2">
           <h1 className="center my-5" >Formularios</h1>
           <Formulario addTodo={addTodo} />
-          <Todos todos={todos} deleteTodo={deleteTodo} updateTodo={updateTodo} />
+          <Todos todos={orderTodo(todos)} deleteTodo={deleteTodo} updateTodo={updateTodo} />
       </div>
       );
 };
