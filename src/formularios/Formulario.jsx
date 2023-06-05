@@ -1,6 +1,7 @@
+import Swal from "sweetalert2";
 import { useState } from "react";
 
-const Controlado = () => {
+const Formulario = ({addTodo}) => {
    
     const [todo, setTodo] = useState({
         title: 'Todo #01',
@@ -13,7 +14,26 @@ const Controlado = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(title, description, state, priority)   
+        if(!title.trim() || !description.trim()){
+            Swal.fire({
+                icon: "error",
+                title: "Error!",
+                text: "Título y descripción son obligatorios",  
+            });
+            
+        }
+        addTodo({
+            id: Date.now(),
+            ...todo,
+            state: state === "completado",
+        });
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Tarea agregada con éxito",
+            showConfirmButton: false,
+            timer: 1500,
+        });
     };
 
     const handleChange = e => {
@@ -66,4 +86,4 @@ const Controlado = () => {
         
     );
 };
-export default Controlado;
+export default Formulario;
